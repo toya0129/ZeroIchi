@@ -14,13 +14,18 @@ public class PlayerController : MonoBehaviour
     private GameObject ball;
 
 	private Coroutine power_coroutine;
-	private Coroutine velocity_coroutine;
+	private Coroutine interva_coroutine;
 	private float power;
 	private float first_power;
 
 	public float velocity;
-	private float max_velocity = 15.0f;
+    private float old_velocity = 0f;
+	private float max_velocity = 10.0f;
+    private float sub_velocity = 0.02f;
 	private bool shoot_trigger = false;
+
+    [SerializeField]
+    private float sweep_sub_velocity = 0.0005f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -33,18 +38,24 @@ public class PlayerController : MonoBehaviour
     {
 		if (shoot_trigger)
 		{
-            if (velocity < 0.0f)
+            if (velocity < 0.5f)
             {
-                Debug.Log("aa");
                 velocity = ball.GetComponent<Rigidbody>().velocity.x;
-                velocity += 0.06f;
+                velocity += sub_velocity;
                 ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
             }
             else
             {
+                shoot_trigger = false;
                 velocity = 0.0f;
+                ball.GetComponent<Rigidbody>().isKinematic = true;
+                if (interva_coroutine != null)
+                {
+                    StopCoroutine(interva_coroutine);
+                }
             }
             power = Math.Abs(velocity / max_velocity);
+            old_velocity = velocity;
 		}
 	}
 
@@ -53,32 +64,27 @@ public class PlayerController : MonoBehaviour
 		StopCoroutine(power_coroutine);
 		ball.GetComponent<Rigidbody>().velocity = ball.transform.forward * power * max_velocity;
         velocity = ball.GetComponent<Rigidbody>().velocity.x;
-        //velocity_coroutine = StartCoroutine(FixedVelocity());
         shoot_trigger = true;
         cameraMove.SetTarget(ball.transform);
 	}
 	public void FloorSweep()
 	{
-		//StopCoroutine(velocity_coroutine);
-        velocity -= 1f;
-		ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
-        //velocity_coroutine = StartCoroutine(FixedVelocity());
+        //shoot_trigger = false;
+        sub_velocity = sweep_sub_velocity;
+
+        if (interva_coroutine == null)
+        {
+            interva_coroutine = StartCoroutine(Interval());
+        }
     }
 
-	private IEnumerator FixedVelocity()
-	{
-		do
-		{
-			velocity = ball.GetComponent<Rigidbody>().velocity.x;
-			velocity += 0.00001f;
-			ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
-			yield return new WaitForSeconds(0.01f);
-		} while (velocity < 0.0f);
-		velocity = 0.0f;
-        shoot_trigger = false;
-		yield break;
-	}
-
+    private IEnumerator Interval()
+    {
+        yield return new WaitForSeconds(1f);
+        sub_velocity = 0.02f;
+        interva_coroutine = null;
+        yield break;
+    }
 	private IEnumerator PowerGauge()
 	{
 		bool trigger = true;
