@@ -107,7 +107,7 @@ public class GameController : MonoBehaviour
     }
     public static void LoadResultScene()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("Title");
     }
     #endregion
 }

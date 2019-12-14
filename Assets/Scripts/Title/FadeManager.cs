@@ -53,6 +53,7 @@ public class FadeManager : MonoBehaviour
     {
         if (fadeImage == null) Init();
         fadeImage.color = Color.black;
+        alpha = 1.0f;
         isFadeIn = true;
     }
 
@@ -63,6 +64,7 @@ public class FadeManager : MonoBehaviour
         nextScene = name;
         fadeImage.color = Color.clear;
         fadeCanvas.enabled = true;
+        alpha = 0;
         isFadeOut = true;
     }
 
