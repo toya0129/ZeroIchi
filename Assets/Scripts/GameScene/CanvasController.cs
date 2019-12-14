@@ -24,6 +24,6 @@ public class CanvasController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        bar.GetComponent<Slider>().value = playerController.Power;
+        bar.GetComponent<Image>().fillAmount = playerController.Power;
     }
 }
