@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 		if (shoot_trigger)
 		{
@@ -47,12 +47,13 @@ public class PlayerController : MonoBehaviour
             else
             {
                 shoot_trigger = false;
-                velocity = 0.0f;
                 ball.GetComponent<Rigidbody>().isKinematic = true;
+                velocity = 0.0f;
                 if (interva_coroutine != null)
                 {
                     StopCoroutine(interva_coroutine);
                 }
+                StartCoroutine(gameController.GameEnd());
             }
             power = Math.Abs(velocity / max_velocity);
             old_velocity = velocity;

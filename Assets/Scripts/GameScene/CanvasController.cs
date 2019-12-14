@@ -10,10 +10,15 @@ public class CanvasController : MonoBehaviour
     [SerializeField]
     private GameObject bar;
 
+    [SerializeField]
+    private GameObject map;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        SpriteRenderer spriteRenderer = map.GetComponent<SpriteRenderer>();
+        spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        spriteRenderer.receiveShadows = true;
     }
 
     // Update is called once per frame

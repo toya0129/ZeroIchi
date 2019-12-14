@@ -69,4 +69,9 @@ public class InputScript : MonoBehaviour
             }
         }
     }
+
+    public int InputPhase
+    {
+        set { input_phase = value; }
+    }
 }
