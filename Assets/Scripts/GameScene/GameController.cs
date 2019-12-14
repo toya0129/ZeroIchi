@@ -54,7 +54,6 @@ public class GameController : MonoBehaviour
             enemy_sub[j].GetComponent<SphereCollider>().enabled = false;
             enemy_sub[j].transform.GetChild(0).GetComponent<SphereCollider>().enabled = true;
             enemy_sub[j].GetComponent<Rigidbody>().useGravity = false;
-
         }
         yield return StartCoroutine(ScoreCalulation());
 
@@ -69,6 +68,14 @@ public class GameController : MonoBehaviour
         {
             score_object[i].GetComponent<GoalCollider>().ScoreCalculationTrigger = true;
             yield return new WaitForSeconds(0.5f);
+        }
+        for (int i = 0; i < player_sub.Count; i++)
+        {
+            player_sub[i].GetComponent<Rigidbody>().useGravity = false;
+        }
+        for (int j = 0; j < enemy_sub.Count; j++)
+        {
+            enemy_sub[j].GetComponent<Rigidbody>().useGravity = false;
         }
         yield break;
     }
