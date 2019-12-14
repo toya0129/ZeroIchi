@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 		if (shoot_trigger)
 		{
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StopCoroutine(interva_coroutine);
                 }
+                StartCoroutine(gameController.GameEnd());
             }
             power = Math.Abs(velocity / max_velocity);
             old_velocity = velocity;

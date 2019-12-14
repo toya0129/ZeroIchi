@@ -30,12 +30,6 @@ public class EnemyScript : MonoBehaviour
         EnemyAndPlayerGenerate();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void EnemyAndPlayerGenerate()
     {
         GameObject obj;
