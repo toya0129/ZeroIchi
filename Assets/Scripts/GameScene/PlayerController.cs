@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
 	private Coroutine power_coroutine;
 	private float power;
-	private const float max_velocity;
+	private float max_velocity;
 
 
 	// Start is called before the first frame update
