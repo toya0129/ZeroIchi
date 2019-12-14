@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 shoot_trigger = false;
-                velocity = 0.0f;
                 ball.GetComponent<Rigidbody>().isKinematic = true;
+                velocity = 0.0f;
                 if (interva_coroutine != null)
                 {
                     StopCoroutine(interva_coroutine);
