@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,9 +14,13 @@ public class PlayerController : MonoBehaviour
     private GameObject ball;
 
 	private Coroutine power_coroutine;
+	private Coroutine velocity_coroutine;
 	private float power;
-	private float max_velocity;
+	private float first_power;
 
+	public float velocity;
+	private float max_velocity = 15.0f;
+	private bool shoot_trigger = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -26,23 +31,52 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (shoot_trigger)
+		{
+            if (velocity < 0.0f)
+            {
+                Debug.Log("aa");
+                velocity = ball.GetComponent<Rigidbody>().velocity.x;
+                velocity += 0.06f;
+                ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
+            }
+            else
+            {
+                velocity = 0.0f;
+            }
+            power = Math.Abs(velocity / max_velocity);
+		}
 	}
 
 	public void BallShoot()
     {
 		StopCoroutine(power_coroutine);
-		ball.GetComponent<Rigidbody>().velocity = new Vector3(-power, 0, 0);
-
-		cameraMove.SetTarget(ball.transform);
+		ball.GetComponent<Rigidbody>().velocity = ball.transform.forward * power * max_velocity;
+        velocity = ball.GetComponent<Rigidbody>().velocity.x;
+        //velocity_coroutine = StartCoroutine(FixedVelocity());
+        shoot_trigger = true;
+        cameraMove.SetTarget(ball.transform);
 	}
-    public void FloorSweep()
-    {
-        
+	public void FloorSweep()
+	{
+		//StopCoroutine(velocity_coroutine);
+        velocity -= 1f;
+		ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
+        //velocity_coroutine = StartCoroutine(FixedVelocity());
     }
 
-    private void FixedVelocity()
+	private IEnumerator FixedVelocity()
 	{
-		Vector3 velocity = ball.GetComponent<Rigidbody>().velocity;
+		do
+		{
+			velocity = ball.GetComponent<Rigidbody>().velocity.x;
+			velocity += 0.00001f;
+			ball.GetComponent<Rigidbody>().velocity = new Vector3(velocity, 0, 0);
+			yield return new WaitForSeconds(0.01f);
+		} while (velocity < 0.0f);
+		velocity = 0.0f;
+        shoot_trigger = false;
+		yield break;
 	}
 
 	private IEnumerator PowerGauge()
