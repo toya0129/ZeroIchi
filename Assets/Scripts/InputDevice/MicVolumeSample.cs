@@ -7,10 +7,36 @@ public class MicVolumeSample : MonoBehaviour
     [SerializeField, Range(0f, 10f)] float m_gain = 1f; // 音量に掛ける倍率
 
     float m_volumeRate; // 音量(0-1)
+
+    public static MicVolumeSample Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    private static MicVolumeSample instance = null;
+    void Awake()
+    {
+        // 初回作成時
+        if (instance == null)
+        {
+            instance = this;
+            // シーンをまたいで削除されないように設定
+            DontDestroyOnLoad(gameObject);
+            // セーブデータを読み込む
+            //Load();
+        }
+        // 2個目以降の作成時
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
         AudioSource aud = GetComponent<AudioSource>();
         if ((aud != null) && (Microphone.devices.Length > 0)) // オーディオソースとマイクがある
         {
