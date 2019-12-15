@@ -20,6 +20,7 @@ public class UiController : MonoBehaviour
     float fadeTime = 1.0f;
     int key = 1;
 
+    bool canSkip = false;
 
     float moveSpeed = 20.0f;
 
@@ -49,7 +50,10 @@ public class UiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(canSkip)
+        {
+            
+        }
     }
 
     // Title
@@ -72,7 +76,7 @@ public class UiController : MonoBehaviour
     IEnumerator InResultState()
     {
         StartCoroutine(MoveIN_UI(result));
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(MoveIN_UI(score));
         yield return new WaitForSeconds(1.0f);
@@ -84,11 +88,16 @@ public class UiController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(MoveIN_UI(ranks[2]));
-        yield return new WaitForSeconds(5.0f);
+        while(ranks[2].localPosition.x >= 0)
+        {
+            yield return null;
+        }
+        canSkip = true;
+        yield return new WaitForSeconds(2.0f);
 
         state = StartCoroutine(OutResultState());
     }
-
+    // UIの移動（右から左）
     IEnumerator MoveIN_UI(RectTransform ui)
     {
         float positionX = ui.localPosition.x;
@@ -100,7 +109,7 @@ public class UiController : MonoBehaviour
         }
         ui.localPosition = new Vector3(0, ui.localPosition.y, ui.localPosition.z);
     }
-
+    // リザルトが捌けていく
     IEnumerator OutResultState()
     {
         StartCoroutine(MoveOUT_UI(result));
@@ -125,7 +134,7 @@ public class UiController : MonoBehaviour
         }
         state = StartCoroutine(TitleState());
     }
-    
+    // UIの移動（右から左）
     IEnumerator MoveOUT_UI(RectTransform ui)
     {
         float positionX = ui.localPosition.x;

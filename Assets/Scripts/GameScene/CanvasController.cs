@@ -16,6 +16,9 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        //FadeIn
+        FadeManager.FadeIn();
+
         SpriteRenderer spriteRenderer = map.GetComponent<SpriteRenderer>();
         spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         spriteRenderer.receiveShadows = true;
