@@ -48,12 +48,17 @@ public class GameController : MonoBehaviour
             player_sub[i].GetComponent<SphereCollider>().enabled = false;
             player_sub[i].transform.GetChild(0).GetComponent<SphereCollider>().enabled = true;
             player_sub[i].GetComponent<Rigidbody>().useGravity = false;
+            player_sub[i].GetComponent<Rigidbody>().isKinematic = true;
+            player_sub[i].GetComponent<Rigidbody>().isKinematic = false;
         }
-        for(int j = 0; j < enemy_sub.Count; j++)
+        for (int j = 0; j < enemy_sub.Count; j++)
         {
             enemy_sub[j].GetComponent<SphereCollider>().enabled = false;
             enemy_sub[j].transform.GetChild(0).GetComponent<SphereCollider>().enabled = true;
             enemy_sub[j].GetComponent<Rigidbody>().useGravity = false;
+            enemy_sub[j].GetComponent<Rigidbody>().isKinematic = true;
+            enemy_sub[j].GetComponent<Rigidbody>().isKinematic = false;
+
         }
         yield return StartCoroutine(ScoreCalulation());
 
