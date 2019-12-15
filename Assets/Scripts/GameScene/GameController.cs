@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
 
     private static int score;
     private static int[] rank = { 0, 0, 0};
-    private static float voiceMeeter = 0.0f;
     private static bool game_end_flag;
 
     private List<GameObject> player_sub;
@@ -128,11 +127,7 @@ public class GameController : MonoBehaviour
             //Save();
         }
     }
-    public static float VoiceMeeter
-    {
-        get { return voiceMeeter; }
-        set { voiceMeeter = value; }
-    }
+
     #endregion
 
     #region Scene Load
