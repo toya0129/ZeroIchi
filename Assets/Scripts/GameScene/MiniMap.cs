@@ -38,12 +38,12 @@ public class MiniMap : MonoBehaviour
 
         for(int i = 0; i < player_sub.Count; i++)
         {
-            player_sub_area.transform.GetChild(i).localPosition = new Vector3(player_sub_area.transform.GetChild(i).localPosition.x, player_sub[i].transform.localPosition.x * offset, player_sub_area.transform.GetChild(i).localPosition.z);
+            player_sub_area.transform.GetChild(i).localPosition = new Vector3(player_sub[i].transform.localPosition.z * offset, player_sub[i].transform.localPosition.x * offset, player_sub_area.transform.GetChild(i).localPosition.z);
         }
 
         for (int j = 0; j < enemy_sub.Count; j++)
         {
-            enemy_sub_area.transform.GetChild(j).localPosition = new Vector3(enemy_sub_area.transform.GetChild(j).localPosition.x, enemy_sub[j].transform.localPosition.x * offset, enemy_sub_area.transform.GetChild(j).localPosition.z);
+            enemy_sub_area.transform.GetChild(j).localPosition = new Vector3(enemy_sub[j].transform.localPosition.z * offset, enemy_sub[j].transform.localPosition.x * offset, enemy_sub_area.transform.GetChild(j).localPosition.z);
         }
     }
 }
