@@ -65,7 +65,7 @@ public class InputScript : MonoBehaviour
 
     private void Digital_Input()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             ActionStart();
         }

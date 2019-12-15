@@ -6,12 +6,21 @@ public class LastSweep : MonoBehaviour
 {
     [SerializeField]
     private InputScript inputScript;
+    [SerializeField]
+    private CanvasController canvasController;
+
+    private bool trigger = true;
 
     public void OnTriggerEnter(Collider collider)
     {
         if(collider.gameObject.tag == "Player")
         {
-            inputScript.InputPhase = 99;
+            if(trigger)
+            {
+                trigger = false;
+                canvasController.SwitchGaugeInLastSweep();
+                inputScript.InputPhase = 99;
+            }
         }
     }
 }

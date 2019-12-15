@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BallScoreCollider : MonoBehaviour
 {
+    private GameController gameController;
     private int score;
 
+    private void Start()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
     private void OnDestroy()
     {
-        GameController gameController = GameObject.Find("GameController").GetComponent<GameController>();
         if(this.gameObject.tag == "Player")
         {
             gameController.AddScore(score);
