@@ -41,6 +41,9 @@ public class UiController : MonoBehaviour
         ranks[2].localPosition = new Vector3(2000, -425, 0);
 
         myScore.text = GameController.Score.ToString();
+
+        
+
         rankScore[0].text = GameController.Rank1.ToString();
         rankScore[1].text = GameController.Rank2.ToString();
         rankScore[2].text = GameController.Rank3.ToString();
@@ -55,6 +58,16 @@ public class UiController : MonoBehaviour
             titleLogo.localPosition = new Vector3(2000, 0, 0);
             state = StartCoroutine(InResultState());
         }        
+    }
+
+    void UpdateRanking()
+    {
+        int tmp1 = 0;
+        int tmp2 = 0;
+        if (true)
+        {
+
+        }
     }
 
     // Update is called once per frame
