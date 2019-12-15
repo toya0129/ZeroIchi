@@ -102,13 +102,9 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region Scene Load
-    public static void LoadTitleScene()
-    {
-        SceneManager.LoadScene("");
-    }
     public static void LoadGameScene()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("GameScene");
     }
     public static void LoadResultScene()
     {
