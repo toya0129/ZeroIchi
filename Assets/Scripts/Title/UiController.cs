@@ -16,6 +16,11 @@ public class UiController : MonoBehaviour
     [SerializeField]
     RectTransform[] ranks;
 
+    [SerializeField]
+    Text myScore;
+    [SerializeField]
+    Text[] rankScore;
+
     float alpha = 1.0f;
     float fadeTime = 1.0f;
     int key = 1;
@@ -35,6 +40,11 @@ public class UiController : MonoBehaviour
         ranks[1].localPosition = new Vector3(2000, -250, 0);
         ranks[2].localPosition = new Vector3(2000, -425, 0);
 
+        myScore.text = GameController.Score.ToString();
+        rankScore[0].text = GameController.Rank1.ToString();
+        rankScore[1].text = GameController.Rank2.ToString();
+        rankScore[2].text = GameController.Rank3.ToString();
+
         if (state == null)
         {
             titleLogo.localPosition = new Vector3(0, 0, 0);
@@ -44,7 +54,7 @@ public class UiController : MonoBehaviour
         {
             titleLogo.localPosition = new Vector3(2000, 0, 0);
             state = StartCoroutine(InResultState());
-        }
+        }        
     }
 
     // Update is called once per frame
@@ -132,6 +142,7 @@ public class UiController : MonoBehaviour
         {
             yield return null;
         }
+        //InputScript.Instance.InputPhase = 2;
         state = StartCoroutine(TitleState());
     }
     // UIの移動（右から左）

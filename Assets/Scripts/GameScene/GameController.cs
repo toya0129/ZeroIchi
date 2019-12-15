@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private EnemyScript enemyScript;
 
     private static int score;
+    private static int[] rank = { 0, 0, 0};
     private static bool game_end_flag;
 
     private List<GameObject> player_sub;
@@ -94,6 +95,39 @@ public class GameController : MonoBehaviour
     {
         get { return game_end_flag; }
     }
+    public static int Score
+    {
+        get { return score; }
+    }
+
+    public static int Rank1
+    {
+        get { return rank[0]; }
+        set
+        {
+            rank[0] = value;
+            //Save();
+        }
+    }
+    public static int Rank2
+    {
+        get { return rank[1]; }
+        set
+        {
+            rank[1] = value;
+            //Save();
+        }
+    }
+    public static int Rank3
+    {
+        get { return rank[2]; }
+        set
+        {
+            rank[2] = value;
+            //Save();
+        }
+    }
+
     #endregion
 
     #region Scene Load

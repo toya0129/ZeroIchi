@@ -13,6 +13,7 @@ public class InputScript : MonoBehaviour
     // 入力かのであるか
     private bool input_enable;
 
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -44,6 +45,14 @@ public class InputScript : MonoBehaviour
                 break;
             case 1:
                 playerController.FloorSweep();
+                break;
+            case 2:
+                //Title
+                FadeManager.FadeOut("GameScene");
+                break;
+            case 3:
+                //Result
+
                 break;
         }
     }
