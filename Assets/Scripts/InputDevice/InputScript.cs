@@ -24,6 +24,7 @@ public class InputScript : MonoBehaviour
     {
         Key_Input();
         Digital_Input();
+        Audio_Input();
         //Analog_Input();
         //ActionStart();
     }
@@ -45,6 +46,15 @@ public class InputScript : MonoBehaviour
             case 1:
                 playerController.FloorSweep();
                 break;
+
+        }
+    }
+
+    private void Audio_Input()
+    {
+        if(GameController.VoiceMeeter >= 0.5)
+        {
+            ActionStart();
         }
     }
 
