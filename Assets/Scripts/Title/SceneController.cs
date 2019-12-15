@@ -19,5 +19,9 @@ public class SceneController : MonoBehaviour
         {
             FadeManager.FadeOut("GameScene");
         }
+        if (GameController.VoiceMeeter >= 0.5)
+        {
+            FadeManager.FadeOut("GameScene");
+        }
     }
 }
