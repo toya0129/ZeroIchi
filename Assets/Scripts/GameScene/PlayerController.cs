@@ -23,12 +23,13 @@ public class PlayerController : MonoBehaviour
 
 	public float velocity;
     private float old_velocity = 0f;
-	private float max_velocity = 10.0f;
-    private float sub_velocity = 0.02f;
+	private float max_velocity = 5.0f;
+    private float default_velocity = 0.005f;
+    private float sub_velocity = 0.005f;
 	private bool shoot_trigger = false;
 
     [SerializeField]
-    private float sweep_sub_velocity = 0.0005f;
+    private float sweep_sub_velocity = 0.002f;
 
 	// Start is called before the first frame update
 	private void Start()
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Interval()
     {
         yield return new WaitForSeconds(1f);
-        sub_velocity = 0.02f;
+        sub_velocity = default_velocity;
         interva_coroutine = null;
         yield break;
     }
