@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
 	[SerializeField]
 	private CameraMove cameraMove;
+    [SerializeField]
+    private CanvasController canvasController;
 
     [SerializeField]
     private GameObject ball;
 
 	private Coroutine power_coroutine;
 	private Coroutine interva_coroutine;
+    private Coroutine sweep;
 	private float power;
 	private float first_power;
 
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private float sweep_sub_velocity = 0.0005f;
 
 	// Start is called before the first frame update
-	void Start()
+	private void Start()
     {
 		power_coroutine = StartCoroutine(PowerGauge());
 	}
@@ -62,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
 	public void BallShoot()
     {
+        canvasController.SwitchGaugeInShoot();
+        StartCoroutine(canvasController.EntrySweepCharacter());
 		StopCoroutine(power_coroutine);
 		ball.GetComponent<Rigidbody>().velocity = ball.transform.forward * power * max_velocity;
         velocity = ball.GetComponent<Rigidbody>().velocity.x;
@@ -70,7 +75,8 @@ public class PlayerController : MonoBehaviour
 	}
 	public void FloorSweep()
 	{
-        //shoot_trigger = false;
+        sweep = StartCoroutine(canvasController.SweepCharacter());
+
         sub_velocity = sweep_sub_velocity;
 
         if (interva_coroutine == null)
